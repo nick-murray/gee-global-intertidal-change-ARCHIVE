@@ -61,7 +61,7 @@ var trainingLibrary = covariateLibrary
   .sort('random'); 
 
 // Stage 1 Classifier Options
-var class_other = [0,1,6,7]; // non tidal wetland
+var class_other = [0,1,7]; // non tidal wetland
 
 var class_tw = [2,3,5]; // mudflat, saltmarsh, mangrove
 
@@ -78,7 +78,7 @@ var trainDat_tw = trainingLibrary.filter(ee.Filter.inList('CLASS', class_tw))
   });
 
 // Balance classes
-var trainDat = trainDat_tw.limit(17772) 
+var trainDat = trainDat_tw.limit(17747) 
   .merge(trainDat_other); 
 
 // classifier
