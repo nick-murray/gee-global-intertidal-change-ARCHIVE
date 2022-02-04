@@ -20,15 +20,18 @@ The code developed to map tidal wetlands globally in Earth Engine is designed to
 * Classify the change flat into loss, gain or stable (Stage 2)
 * Identify the type of ecosystem lost or gained over the study period (Stage 3)
 
-**Note:** Owing to limited [usage and asset quotas](https://developers.google.com/earth-engine/guides/usage?hl=en) of users of Earth Engine, this code is unlikely to run at the full global scale in the Earth Engine [code editor](https://code.earthengine.google.com/). Please contact the corresponding author of the published paper to discuss how to implement this code in Earth Engine.
+#### User notes 
+* Owing to limited [usage and asset quotas](https://developers.google.com/earth-engine/guides/usage?hl=en) of users of Earth Engine, aspects of this software are unlikely to run at the full global scale in the Earth Engine [code editor](https://code.earthengine.google.com/). 
+* This code has been simplified to remove versioning, data properties, file paths and handling of usage quotas. 
+* Please contact the corresponding author of the published paper to discuss how to best implement this code in Earth Engine.
 
-![img](figures/Fig_S3_Singapore_v4-01.jpg)
+![img](figures/wetland_change.jpg)
 
 #### Data
 Datasets associated with this project are archived at the following locations.
 
 #### Licence
-This software is licensed under a Creative Commons Attribution 4.0 International License. [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+This software is licensed under a Creative Commons Attribution-Non Commercial 4.0 International License. [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 
 #### Further information:
 For any further information about this project, code or data please contact the corresponding author of the published paper.

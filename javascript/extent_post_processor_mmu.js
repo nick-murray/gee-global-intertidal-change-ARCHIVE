@@ -1,28 +1,25 @@
-/*******************
- * s1_postProcessor  
- *******************/
+/**
+ * Global tidal wetland extent post processor.
+ */
 
 var startDate = '2017-01-01';
 var endDate = '2019-12-31';
-var mmuPixels = 100 // No. pixels
+var mmuPixels = 100 
 var yearString = startDate.slice(0,4)
   .concat(endDate.slice(0,4));
-var gicPath = 'path to s1'; // <-- IMPORT GIC STAGE 1 
+var gicPath = 'foo'; // path to tw_export
 
 var gicImage =  ee.Image(gicPath
     .concat('_')
-    .concat(yearString)
-    .concat('_')
-    .concat(version));
+    .concat(yearString);
 
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);  
 
-// Function to effect removal of patches >MMU size
 function mmuRemove (gicImage,mmuPixels){
-  // removes salt and pepper 
-  var image = gicImage.select([0]).gte(50).selfMask();
-  var connected = image.connectedPixelCount(mmuPixels+2,true); // use eight-connected to allow linear features
-  var elim = connected.gte(mmuPixels).selfMask().select([0],['gic_cw_extent']); // rename
+  // remove small patches
+  var image = gicImage.select([0]).gte(50).selfMask(); 
+  var connected = image.connectedPixelCount(mmuPixels+2,true); // eight-connected
+  var elim = connected.gte(mmuPixels).selfMask().select([0],['gic_cw_extent']); 
   var pp1 = gicImage.select([1]).updateMask(elim); 
   var ppOut = gicImage.select([0]).addBands(pp1).addBands(elim);
   return ppOut;
@@ -30,9 +27,8 @@ function mmuRemove (gicImage,mmuPixels){
 var pp = mmuRemove(gicImage.clip(site), mmuPixels).set({
   mmuNoPixels:mmuPixels
   })
-print ('pp:', pp)
 
-var assetName = 'file path'
+var assetName = 'foo'
   .concat('_')
   .concat(startDate.slice(0,4))
   .concat('')

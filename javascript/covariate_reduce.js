@@ -1,27 +1,17 @@
-/****************************************** 
-* Export Landsat covariates
-/******************************************/  
- 
-/****************************************** 
- * Global Variables
- ******************************************/
-// Coast filter
+/**
+ * Develop covariates
+ */
+
 var simpleCoastLine = ee.FeatureCollection('projects/UQ_intertidal/dataMasks/simpleNaturalEarthCoastline_v1').first().geometry();
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);
 var dataMask = ee.Image('projects/UQ_intertidal/dataMasks/topyBathyEcoMask_300m_v2_0_3'); 
-
-// Analysis time step
 var startDate = '2017-01-01';
 var endDate = '2019-12-31';
-
-// Bands to select during collection creation.
 var bandSelect = ['green', 'swir1', 'swir2', 'nir', 'red', 'blue'];
 var bands8 = ['B3', 'B6', 'B7', 'B5', 'B4', 'B2'];
 var bands7 = ['B2', 'B5', 'B7', 'B4', 'B3','B1'];
+var parallelScale = 8;
 
-/****************************************************
- * Set up mapping functions, reducers, etc.
- ****************************************************/
 var mappingFunctions = { 
   
   applyPixelQAcloudMask: function (image) {
@@ -71,7 +61,6 @@ var mappingFunctions = {
   }
 };
 
-// Reduce image collection to per band composite metrics
 var reducer = ee.Reducer.min()
     .combine(ee.Reducer.max(), '', true)
     .combine(ee.Reducer.stdDev().setOutputs(['stdev']), '', true)
@@ -86,11 +75,8 @@ var reducer = ee.Reducer.min()
     .combine(ee.Reducer.intervalMean(10, 90).setOutputs(['1090']), '', true)
     .combine(ee.Reducer.intervalMean(25, 75).setOutputs(['2575']), '', true);
 
-/********************************************* 
- * Create the image collection.
- *********************************************/
-function generateFullCollection() { 
-  // collect Landsat imagery and process each image
+function generateCollection() { 
+  // Create image collection
   var L5collection = ee.ImageCollection('LANDSAT/LT05/C01/T1_SR')
       .filterDate(startDate, endDate)
       .filterBounds(site)
@@ -115,19 +101,14 @@ function generateFullCollection() {
       .map(mappingFunctions.applyPixelQAcloudMask)
       .map(mappingFunctions.applyCoastMask)
       .select(bands8, bandSelect);
-
   var collectionFull = ee.ImageCollection(L5collection
       .merge(L7collection)
       .merge(L8collection));
   return collectionFull;
 }
 
-var collection = generateFullCollection(); 
+var collection = generateCollection(); 
 
-/********************************************* 
- * Set up covariate layers to be exported.
- *********************************************/
-var parallelScale = 8;
 var covariates = { 
   awei: collection.map(mappingFunctions.applyAWEI)
       .reduce(reducer, parallelScale), 
@@ -150,22 +131,14 @@ var covariates = {
       .setOutputs(['1090']))
 };
 
-/*********************************
- * Export covariate to Asset.
- *********************************/
+var covariateName = 'evi'; // export separately ([awe, ndw, mnd, ndv, evi, nir_1090, gre_1090, swi_1090]))
 
-var covariateName = 'evi'; // <<-- CHANGE FOR EACH EXPORT for filenaming ([awe, ndw, mnd, ndv, evi, nir_1090, gre_1090, swi_1090]))
-
-// outputs
 var assetName = 'projects/UQ_intertidal/covariate_layers/L3_'
   .concat(covariateName)
   .concat('_')
   .concat(startDate.slice(0,4))
   .concat(endDate.slice(0,4))
-  .concat('_v2_0');
-print (assetName, 'assetName');
 
-// image properties
 var vars = {
   startDate:startDate,
   endDate:endDate,
@@ -175,16 +148,11 @@ var vars = {
   dateGenerated: ee.Date(Date.now())
 };
 
-
-// For single covariate outputs:
 var covariateExport = covariates
-    .evi // <<-- CHANGE FOR EACH EXPORT ([awei, ndwi, mndwi, ndvi, evi, nir, green, swir1)
-    //.select([covariateName])
+    .evi // select variablefor export ([awei, ndwi, mndwi, ndvi, evi, nir, green, swir1)
     .set(vars)
     .float(); 
-print (covariateToExport);
 
-// Export covariate
 Export.image.toAsset({
   image: covariateExport, 
   description: 'export_'
@@ -195,5 +163,5 @@ Export.image.toAsset({
   assetId: assetName,
   scale: 30,
   region: site, 
-  maxPixels: 10000000000000 // this is max
+  maxPixels: 10000000000000
 });
