@@ -14,7 +14,6 @@ var gic2001 = ee.Image('foo'), // import post-processed tw_export (pp)
 var covariatePath = 'foo', // path to covariates folder
 var trainingSet = 'foo' // path to loss/gain/stable training data
 
-
 // Single image from change Flag
 var changeFlag = changeFlagImage
   .select(['loss'])

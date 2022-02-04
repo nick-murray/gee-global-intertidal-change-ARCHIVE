@@ -91,5 +91,3 @@ Export.image.toAsset({
   pyramidingPolicy: {'.default': 'mode'},
   maxPixels: 1000000000000
 });
-
-

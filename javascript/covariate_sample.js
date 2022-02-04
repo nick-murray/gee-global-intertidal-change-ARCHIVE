@@ -5,7 +5,7 @@
 var trainingSet = ee.FeatureCollection('foo'); // path to training set
 var startDate = '2014-01-01'; // reference period for sampling
 var endDate = '2016-12-31'; // reference period for sampling
-var covariatePath = 'foo', // path to covariates
+var covariatePath = 'foo', // path to covariate folder
 var yearString = startDate.slice(0,4)
   .concat(endDate.slice(0,4));
   

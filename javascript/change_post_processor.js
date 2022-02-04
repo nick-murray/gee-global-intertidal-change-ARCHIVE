@@ -56,8 +56,7 @@ function mmuRemove (changeImage,mmuPixels){
   var ppOut = ppLoss
     .addBands(ppLossYear)
     .addBands(ppGain)
-    .addBands(ppGainYear)
-    .copyProperties(changeImage);
+    .addBands(ppGainYear);
   return ee.Image(ppOut);
 }
 
