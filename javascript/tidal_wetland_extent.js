@@ -11,9 +11,9 @@ var globOptions = {
   endDate: '2019-12-31',
   outScale: 30, 
   probabilityThreshold: 50,
-  covariatePath: 'foo', // Covariates path
+  covariatePath: 'foo', // path to covariate folder
   landsatCollection: 'C01/T1_SR',
-  trainingDataID:'foo',  // Training data path
+  trainingDataID:'foo',  // path to predictorSet
   dateGenerated: ee.Date(Date.now()),
   classLabelList: ['Land', 'Water', 'Tidal Flat', 'Mangrove', 'Saltmarsh', 'Seagrass', 'Aquaculture'],
   classValueList: [0,1,2,3,5,6,7],

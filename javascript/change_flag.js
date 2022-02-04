@@ -39,7 +39,7 @@ var makeLossGain = function(y1, y2, year){
   var loss = y1.select([1])
     .updateMask(y2.select([1]).unmask().lt(1))
     .updateMask(gic2001.select([1])) // can only be lost if occurred in 2001
-    .updateMask(gic2019.select([1]).unmask().lt(1)) // can only be lost if no occurrence in 2019
+    .updateMask(gic2019.select([1]).unmask().lt(1)) // can only be lost if no occurrences in 2019
     .rename(['loss']);
   var lossYear = loss.remap([1],[year])
     .rename(['lossYear']).int()

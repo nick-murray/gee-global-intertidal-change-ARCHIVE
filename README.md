@@ -14,21 +14,16 @@ Murray et al. (in submission) Losses and gains of Earth's tidal wetlands.
 
 #### Usage
 The code developed to map tidal wetlands globally in Earth Engine is designed to be deployed separately in Earth Engine in following order:
-* Develop covariate layers from Landsat Archive Imagery `javascript/covariate_reduce.js`
-* Sample covariate layers using a training library annotated by ecosystem type `javascript/covariate_sample.js`
-* Train a Random Forest model for predicting the distribution of tidal wetlands (Stage 1) `javascript/tidal_wetland_extent.js`
-* Tidal wetland extent post-processing `javascript/extent_post_processor_mmu.js`
-* Identify change flag areas between t1 and t7 `javascript/change_flag.js` and process `javascript/change_post_processor.js`
-* Classify the change flat into loss, gain or stable (Stage 2) `javascript/tidal_wetland_change_classifier.js`
-* Identify the type of ecosystem lost or gained over the study period (Stage 3) `javascript/tidal_wetland_type.js`
+1. Develop covariate layers from Landsat Archive Imagery `javascript/covariate_reduce.js`
+2. Sample covariate layers using a training library annotated by ecosystem type `javascript/covariate_sample.js`
+3. Train a Random Forest model for predicting the distribution of tidal wetlands (Stage 1) `javascript/tidal_wetland_extent.js`
+4. Tidal wetland extent post-processing `javascript/extent_post_processor_mmu.js`
+5. Identify change flag areas between t1 and t7 `javascript/change_flag.js` 
+6. Post process change `javascript/change_post_processor.js`
+7. Classify the change flat into loss, gain or stable (Stage 2) `javascript/tidal_wetland_change_classifier.js`
+8. Identify the type of ecosystem lost or gained over the study period (Stage 3) `javascript/tidal_wetland_type.js`
 
-The result is an image with six bands:
-* "loss"
-* "lossYear"
-* "lossType"
-* "gain"
-* "gainYear"
-* "gainType"
+The result is an image with six bands: loss, lossYear, lossType, gain, gainYear, gainType.
 
 ![img](figures/wetland_change.jpg)
 

@@ -2,7 +2,7 @@
  * Classify change flags as loss, gain or stable.
  */
 
-var changeFlagImage = ee.Image('foo'); // path to change flag image
+var changeFlagImage = ee.Image('foo'); // path to changeFlag_pp2
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);  
 var gic2001 = ee.Image('foo'), // import post-processed tw_export (pp)
     gic2004 = ee.Image('foo'),
@@ -11,11 +11,19 @@ var gic2001 = ee.Image('foo'), // import post-processed tw_export (pp)
     gic2013 = ee.Image('foo'),
     gic2016 = ee.Image('foo'),
     gic2019 = ee.Image('foo');
-var covariatePath = 'foo', // Covariates path
+var covariatePath = 'foo', // path to covariates folder
+var trainingSet = 'foo' // path to loss/gain/stable training data
+
 
 // Single image from change Flag
-var changeFlag = changeFlagImage.select(['loss']).unmask().add(changeFlagImage.select(['gain']).unmask()).gte(1).selfMask();
-
+var changeFlag = changeFlagImage
+  .select(['loss'])
+  .unmask()
+  .add(changeFlagImage
+    .select(['gain'])
+    .unmask())
+  .gte(1)
+  .selfMask();
 
 var covariateLoader = function(covariateCode, yearString){
   var assetPath = covariatePath 
@@ -48,7 +56,7 @@ var s1_probCollection = ee.ImageCollection([
     gic2019.select([0]).addBands(ee.Image(7).int())
     ]);
     
-var linearFit = s1_probCollection.reduce(ee.Reducer.linearFit()); // the trend line plus would help with gain, minus with loss
+var linearFit = s1_probCollection.reduce(ee.Reducer.linearFit());
 
 var fitTrend = linearFit.select('scale'); // trend
 
@@ -64,13 +72,12 @@ var covariateComposite = covariateLoader('awe', '20172019').subtract(covariateLo
         
 var bands = covariateComposite.bandNames();
 
-var trainingSet = 'foo' // path to loss/gain/stable training data
 
 var predictorSet = trainingSet.map(samplePredictors)
-  .distinct('.geo') // remove spatial duplicates
-  .distinct('awe_0010') // remove other duplicates
+  .distinct('.geo') 
+  .distinct('awe_0010') 
   .filter(ee.Filter.neq('awe_min', null))
-  .randomColumn('random',1) //add random number //v200 to v202 were seed 1. Now trying seed 2 to see what happens to mangroves in Norfolk. 
+  .randomColumn('random',1)
   .sort('random'); 
 
 var classifier = ee.Classifier.smileRandomForest({

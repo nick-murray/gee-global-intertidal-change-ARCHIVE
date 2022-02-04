@@ -4,7 +4,7 @@
 
 var simpleCoastLine = ee.FeatureCollection('projects/UQ_intertidal/dataMasks/simpleNaturalEarthCoastline_v1').first().geometry();
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);
-var dataMask = ee.Image('projects/UQ_intertidal/dataMasks/topyBathyEcoMask_300m_v2_0_3'); 
+var dataMask = ee.Image('projects/UQ_intertidal/dataMasks/topyBathyEcoMask_300m_v2_0_3');  // sets mapping area
 var startDate = '2017-01-01';
 var endDate = '2019-12-31';
 var bandSelect = ['green', 'swir1', 'swir2', 'nir', 'red', 'blue'];
@@ -133,8 +133,7 @@ var covariates = {
 
 var covariateName = 'evi'; // export separately ([awe, ndw, mnd, ndv, evi, nir_1090, gre_1090, swi_1090]))
 
-var assetName = 'projects/UQ_intertidal/covariate_layers/L3_'
-  .concat(covariateName)
+var assetName = 'foo' // set file path
   .concat('_')
   .concat(startDate.slice(0,4))
   .concat(endDate.slice(0,4))

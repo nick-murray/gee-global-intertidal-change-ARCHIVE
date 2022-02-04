@@ -3,9 +3,9 @@
  */
 
 var trainingSet = ee.FeatureCollection('foo'); // path to training set
-var startDate = '2014-01-01'; // Reference period
-var endDate = '2016-12-31'; // Reference period
-var covariatePath = 'foo', // Covariates path
+var startDate = '2014-01-01'; // reference period for sampling
+var endDate = '2016-12-31'; // reference period for sampling
+var covariatePath = 'foo', // path to covariates
 var yearString = startDate.slice(0,4)
   .concat(endDate.slice(0,4));
   
@@ -47,7 +47,7 @@ var predictorSet = trainingSet.map(sampleCovariates);
 
 // export
 
-var assetName = 'foo'; // path and asset name
+var assetName = 'foo'; // path and asset name of predictorSet
 
 var vars = {
   startDate:startDate,
