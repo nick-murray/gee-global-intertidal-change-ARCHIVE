@@ -16,7 +16,7 @@ Murray et al. (in submission) Losses and gains of Earth's tidal wetlands.
 The code developed to map tidal wetlands globally in Earth Engine is designed to be deployed separately in Earth Engine in following order:
 1. Develop covariate layers from Landsat Archive Imagery `javascript/covariate_reduce.js`
 2. Sample covariate layers using a training library annotated by ecosystem type `javascript/covariate_sample.js`
-3. Train a Random Forest model for predicting the distribution of tidal wetlands (Stage 1) `javascript/tidal_wetland_extent.js`
+3. Random Forest model for predicting the distribution of tidal wetlands (Stage 1) `javascript/tidal_wetland_extent.js`
 4. Tidal wetland extent post-processing `javascript/extent_post_processor_mmu.js`
 5. Identify change flag areas between t1 and t7 `javascript/change_flag.js` 
 6. Post process change `javascript/change_post_processor.js`
@@ -41,3 +41,11 @@ This software is licensed under a Creative Commons Attribution-Non Commercial 4.
 
 #### Further information:
 For any further information about this project, code or data please contact nicholas.murray@jcu.edu.au.
+
+#### Tests
+- `javascript/covariate_reduce.js` ok
+- `javascript/covariate_sample.js` ok
+- `javascript/tidal_wetland_extent.js` ok
+- `javascript/extent_post_processor_mmu.js` ok
+
+

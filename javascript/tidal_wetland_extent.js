@@ -15,9 +15,9 @@ var globOptions = {
   landsatCollection: 'C01/T1_SR',
   trainingDataID:'foo',  // path to predictorSet
   dateGenerated: ee.Date(Date.now()),
-  classLabelList: ['Land', 'Water', 'Tidal Flat', 'Mangrove', 'Saltmarsh', 'Seagrass', 'Aquaculture'],
-  classValueList: [0,1,2,3,5,6,7],
-  classLabelString: 'Land (0), Water (1), Tidal Flat (2), Mangrove (3), Saltmarsh (5), Seagrass (6), Aquaculture (7)'
+  classLabelList: ['Land', 'Water', 'Tidal Flat', 'Mangrove', 'Saltmarsh',  'Aquaculture'],
+  classValueList: [0,1,2,3,5,7],
+  classLabelString: 'Land (0), Water (1), Tidal Flat (2), Mangrove (3), Saltmarsh (5), Aquaculture (7)'
 }
 
 var yearString = globOptions.startDate.slice(0,4)
@@ -98,11 +98,10 @@ var tw_probability = trainComposite.select(bands)
   .multiply(100)
   .round()
   .uint8();
-var tw_classification = tw_probability.gte(globOptions.probabilityThreshold).selfMask();
+
 
 // Package for export
 var tw_export = tw_probability
-  .addBands(tw_classification.rename('gic_s1_classification'));
 
 // File naming
 var assetName = 'foo'; // path and asset name

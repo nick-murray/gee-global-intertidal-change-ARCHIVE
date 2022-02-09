@@ -5,7 +5,7 @@
 var trainingSet = ee.FeatureCollection('foo'); // path to training set
 var startDate = '2014-01-01'; // reference period for sampling
 var endDate = '2016-12-31'; // reference period for sampling
-var covariatePath = 'foo', // path to covariate folder
+var covariatePath = 'foo'; // path to covariate folder
 var yearString = startDate.slice(0,4)
   .concat(endDate.slice(0,4));
   
@@ -29,8 +29,8 @@ var covariateComposite = covariateLoader('awe')
         .addBands (covariateLoader('ndw'))
         .addBands (covariateLoader('nir_1090')) 
         .addBands (covariateLoader('swi_1090'))
-        .addBands(ee.Image(globOptions.covariatePath.concat('abs_latitude_v2_0'))) 
-        .addBands(ee.Image(globOptions.covariatePath.concat('alosTerrain_2006')))
+        .addBands(ee.Image(covariatePath.concat('abs_latitude_v2_0'))) 
+        .addBands(ee.Image(covariatePath.concat('alosTerrain_2006')))
         .addBands (covariateLoader('minTemp').select(['minimum_2m_air_temperature'],['minTemp']));
 var bands = covariateComposite.bandNames();
 
@@ -53,7 +53,6 @@ var vars = {
   startDate:startDate,
   endDate:endDate,
   landsatCollection: 'C01/T1_SR',
-  covariateName: covariateName,
   assetName: assetName,
   dateGenerated: ee.Date(Date.now())
 };

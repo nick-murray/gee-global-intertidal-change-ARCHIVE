@@ -21,16 +21,6 @@ var s1_probCollection = ee.ImageCollection([
     gic2016.select([0]),
     gic2019.select([0])]);
 
-// gic_s1_classification
-var cwExtents = ee.ImageCollection([
-    gic2001.select([1]), 
-    gic2004.select([1]),
-    gic2007.select([1]),
-    gic2010.select([1]),
-    gic2013.select([1]),
-    gic2016.select([1]),
-    gic2019.select([1])]);
-
 var makeLossGain = function(y1, y2, year){
   // Returns bands of loss/gain over time period
   var dif = y1.select([0])

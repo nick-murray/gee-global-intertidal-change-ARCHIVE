@@ -20,11 +20,10 @@ function mmuRemove (gicImage,mmuPixels){
   var image = gicImage.select([0]).gte(50).selfMask(); 
   var connected = image.connectedPixelCount(mmuPixels+2,true); // eight-connected
   var elim = connected.gte(mmuPixels).selfMask().select([0],['gic_cw_extent']); 
-  var pp1 = gicImage.select([1]).updateMask(elim); 
-  var ppOut = gicImage.select([0]).addBands(pp1).addBands(elim);
+  var ppOut = gicImage.select([0]).addBands(elim);
   return ppOut;
 }
-var pp = mmuRemove(gicImage.clip(site), mmuPixels).set({
+var pp = mmuRemove(gicImage, mmuPixels).set({
   mmuNoPixels:mmuPixels
   })
 
