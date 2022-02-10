@@ -11,10 +11,10 @@ var gic2001 = ee.Image('foo'), // import post-processed tw_export (pp)
     gic2013 = ee.Image('foo'),
     gic2016 = ee.Image('foo'),
     gic2019 = ee.Image('foo');
-var covariatePath = 'foo', // path to covariates folder
+var covariatePath = 'foo'; // path to covariates folder
 var trainingSet = 'foo' // path to loss/gain/stable training data
 
-// Single image from change Flag
+// Single image from change flag to classify within
 var changeFlag = changeFlagImage
   .select(['loss'])
   .unmask()
@@ -28,9 +28,7 @@ var covariateLoader = function(covariateCode, yearString){
   var assetPath = covariatePath 
     .concat(covariateCode)
     .concat('_')
-    .concat(yearString)
-    .concat('_')
-    .concat(globOptions.version);
+    .concat(yearString);
   var im = ee.Image(assetPath);
   return im;
 };
@@ -93,7 +91,7 @@ var gicRaw = covariateComposite
   .updateMask(changeFlag) // limit only to change flagged areas
   .classify(classifier);
   
-var tw_change = ee.Image(gicRaw.eq(1).selfMask().rename('gain')
+var tw_change = ee.Image(gicRaw.eq(1).selfMask().rename('gain'))
   .addBands(gicRaw.eq(2).selfMask().rename('loss'))
   .addBands(changeFlagImage.select(['gainYear']).uint8().updateMask(gicRaw))
   .addBands(changeFlagImage.select(['lossYear']).uint8().updateMask(gicRaw))

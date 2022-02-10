@@ -6,10 +6,11 @@ var mmuPixels = 10
 var gmwHabitatMask2 = ee.FeatureCollection("projects/UQ_intertidal/dataMasks/GMW_Mangrove_Habitat_v5")
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);  
 var changeFlag = ee.Image('foo'); // path to changeFlag
-var errorMask = ee.FeatureCollection('foo') //path to any vectors
+var errorMask = ee.FeatureCollection('foo') //path to vector of any classification error
  
-var invErrorMask = ee.Image(1)
+var errorMaskImg = ee.Image(1)
   .clip(errorMask)
+var invErrorMask = 
   .mask(errorMaskImg
     .mask()
     .not());

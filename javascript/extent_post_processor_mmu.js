@@ -40,5 +40,6 @@ Export.image.toAsset({
   assetId: assetName,
   scale: 30,
   region: site,
+  pyramidingPolicy: {'.default': 'mode'},
   maxPixels: 1000000000000
 });

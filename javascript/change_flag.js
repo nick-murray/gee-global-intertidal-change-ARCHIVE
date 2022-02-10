@@ -57,7 +57,6 @@ var lossGainCollection = ee.ImageCollection([
   makeLossGain(gic2010, gic2013,13),
   makeLossGain(gic2013, gic2016,16),
   makeLossGain(gic2016, gic2019,19)]);
-print (lossGainCollection);
 
 var totalLoss = lossGainCollection.select(['loss']).sum().gte(1).selfMask(); 
 var totalGain = lossGainCollection.select(['gain']).sum().gte(1).selfMask(); 
