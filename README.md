@@ -50,6 +50,6 @@ For any further information about this project, code or data please contact nich
 - `javascript/change_flag.js` - ok
 - `javascript/change_post_processor.js` - ok
 - `javascript/tidal_wetland_change_classifier.js` - ok
-
+- `javascript/tidal_wetland_type.js` - ok
 
 
