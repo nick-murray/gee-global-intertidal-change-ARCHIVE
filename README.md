@@ -52,4 +52,6 @@ For any further information about this project, code or data please contact nich
 - `javascript/tidal_wetland_change_classifier.js` - ok
 - `javascript/tidal_wetland_type.js` - ok
 
+[![DOI](https://zenodo.org/badge/372673451.svg)](https://zenodo.org/badge/latestdoi/372673451)
+
 
