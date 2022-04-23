@@ -1,7 +1,7 @@
 [![DOI](https://zenodo.org/badge/372673451.svg)](https://zenodo.org/badge/latestdoi/372673451)
 
 # Supplementary Data S1 to:
-### Losses and gains of Earth's tidal wetlands (2021)
+### Losses and gains of Earth's tidal wetlands (2022)
 
 #### Description:
 
