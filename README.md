@@ -1,6 +1,6 @@
 
-# Supplementary Data S1 to:
-### Losses and gains of Earth's tidal wetlands (2021)
+# Code for:
+### High-resolution mapping of losses and gains of Earth's tidal wetlands (2022)
 
 #### Description:
 
@@ -9,8 +9,9 @@
 This repository contains the source software developed for the project. A full description of the methods, validation, and limitations of the data produced by this software is available in the published paper. For project updates and additional frequently asked questions, please refer to the [project website](https://www.globalintertidalchange.org/). 
 
 #### Citation
-Use of any aspect of this study requires full attribution (see licence). Please cite the published paper:
-Murray et al. (in submission) Losses and gains of Earth's tidal wetlands.
+Use of any aspect of this study requires full attribution (see licence). Please cite both this archive and the published paper:
+
+Murray, N.J., Worthington, T.A., Bunting, P., Duce, S., Hagger, V., Lovelock, C.E., Lucas, R., Saunders, M.I., Sheaves, M., Spalding, M., Waltham, N.J., Lyons, M.B., (2022) High-resolution mapping of losses and gains of Earth's tidal wetlands. *Science*. [paper link](https://doi.org/10.1126/science.abm9583)
 
 #### Usage
 The code developed to map tidal wetlands globally in Earth Engine is designed to be deployed separately in Earth Engine in following order:
@@ -32,15 +33,14 @@ The result is an image with six bands: loss, lossYear, lossType, gain, gainYear,
 * This code has been simplified to remove versioning, data properties, file paths and handling of usage quotas. 
 * Please contact the corresponding author of the published paper to discuss how to best implement this code in Earth Engine.
 
-
 #### Data
 Datasets associated with this project are archived at the following locations.
 
 #### Licence
-This software is licensed under a Creative Commons Attribution-Non Commercial 4.0 International License. [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+This software is licensed under a Creative Commons Attribution 4.0 International License. [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
 
 #### Further information:
-For any further information about this project, code or data please contact nicholas.murray@jcu.edu.au.
+For any further information about this software please contact nicholas.murray@jcu.edu.au.
 
 #### Tests
 - `javascript/covariate_reduce.js` ok

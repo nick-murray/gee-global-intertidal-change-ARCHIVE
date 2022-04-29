@@ -5,7 +5,6 @@
 var tw_change = 'foo' // path to tw_change image
 var site = ee.Geometry.Polygon([-180, 60, 0, 60, 180, 60, 180, -60, 10, -60, -180, -60], null, false);
 var classList = [2,3,5]; 
-var changeArea = tw_change.select(['loss']).unmask().add(changeFlagImage.select(['gain']).unmask()).gte(1).selfMask();
 
 var globOptions = { 
   outScale: 30, 
@@ -55,6 +54,7 @@ var bands_t1 = trainComposite_t1.bandNames();
 var bands_t2 = trainComposite_t2.bandNames();
 
 var train_Dat = globOptions.trainingDataID
+  .filter(ee.Filter.inList('CLASS', classList)) 
   .distinct('.geo') 
   .distinct('awe_0010')
   .filter(ee.Filter.neq('awe_min', null))
