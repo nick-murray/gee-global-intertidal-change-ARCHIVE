@@ -1,3 +1,4 @@
+[![DOI](https://zenodo.org/badge/372673451.svg)](https://zenodo.org/badge/latestdoi/372673451)
 
 # Code for:
 ### High-resolution mapping of losses and gains of Earth's tidal wetlands (2022)
@@ -50,6 +51,4 @@ For any further information about this software please contact nicholas.murray@j
 - `javascript/change_flag.js` - ok
 - `javascript/change_post_processor.js` - ok
 - `javascript/tidal_wetland_change_classifier.js` - ok
-
-
-
+- `javascript/tidal_wetland_type.js` - ok
