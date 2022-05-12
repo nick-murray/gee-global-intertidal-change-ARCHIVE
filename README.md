@@ -25,8 +25,6 @@ The code developed to map tidal wetlands globally in Earth Engine is designed to
 7. Classify the change flat into loss, gain or stable (Stage 2) `javascript/tidal_wetland_change_classifier.js`
 8. Identify the type of ecosystem lost or gained over the study period (Stage 3) `javascript/tidal_wetland_type.js`
 
-The result is an image with six bands: loss, lossYear, lossType, gain, gainYear, gainType.
-
 ![img](figures/wetland_change.jpg)
 
 #### User notes 
@@ -35,7 +33,7 @@ The result is an image with six bands: loss, lossYear, lossType, gain, gainYear,
 * Please contact the corresponding author of the published paper to discuss how to best implement this code in Earth Engine.
 
 #### Data
-Datasets associated with this project are archived at the following locations.
+Please refer to the [data descriptor](https://github.com/nick-murray/gee-global-intertidal-change-data-descriptor.git) for information about how to access and use the datasets derived from this analysis.
 
 #### Licence
 This software is licensed under a Creative Commons Attribution 4.0 International License. [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/)
